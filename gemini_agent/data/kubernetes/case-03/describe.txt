@@ -1,0 +1,67 @@
+$ kubectl describe pod recommendation-engine-6f7b8c9d54-7m2qx -n shopnow
+Name:             recommendation-engine-6f7b8c9d54-7m2qx
+Namespace:        shopnow
+Priority:         0
+Service Account:  recommendation-engine-sa
+Node:             gke-shopnow-default-pool-a1b2c3d4-xz12/10.140.0.5
+Start Time:       Thu, 25 Jun 2026 06:32:14 +0800
+Labels:           app=recommendation-engine
+                  pod-template-hash=6f7b8c9d54
+Annotations:      <none>
+Status:           Running
+IP:               10.24.1.88
+IPs:
+  IP:           10.24.1.88
+Controlled By:  ReplicaSet/recommendation-engine-6f7b8c9d54
+Containers:
+  recommendation-engine:
+    Container ID:   containerd://7a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f9
+    Image:          gcr.io/shopnow-prod/recommendation-engine:2.3.1
+    Image ID:       gcr.io/shopnow-prod/recommendation-engine@sha256:1a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f809
+    Port:           8082/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Thu, 25 Jun 2026 10:13:05 +0800
+    Last State:     Terminated
+      Reason:       OOMKilled
+      Exit Code:    137
+      Started:      Thu, 25 Jun 2026 10:11:47 +0800
+      Finished:     Thu, 25 Jun 2026 10:13:04 +0800
+    Ready:          True
+    Restart Count:  11
+    Limits:
+      cpu:     1
+      memory:  512Mi
+    Requests:
+      cpu:     500m
+      memory:  256Mi
+    Liveness:   http-get http://:8082/actuator/health/liveness delay=30s timeout=2s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:8082/actuator/health/readiness delay=20s timeout=2s period=10s #success=1 #failure=3
+    Environment:
+      APP_ENV:            production
+      JAVA_TOOL_OPTIONS:  -Xmx480m
+      LOG_LEVEL:          info
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9c4xb (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-9c4xb:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                     From               Message
+  ----     ------     ----                    ----               -------
+  Normal   Scheduled  3h41m                   default-scheduler  Successfully assigned shopnow/recommendation-engine-6f7b8c9d54-7m2qx to gke-shopnow-default-pool-a1b2c3d4-xz12
+  Normal   Pulled     3h41m                   kubelet            Successfully pulled image "gcr.io/shopnow-prod/recommendation-engine:2.3.1" in 8.713s (8.713s including waiting)
+  Normal   Created    24m (x12 over 3h41m)    kubelet            Created container recommendation-engine
+  Normal   Started    24m (x12 over 3h41m)    kubelet            Started container recommendation-engine
+  Normal   Pulled     24m (x11 over 3h39m)    kubelet            Container image "gcr.io/shopnow-prod/recommendation-engine:2.3.1" already present on machine

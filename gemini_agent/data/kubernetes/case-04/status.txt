@@ -1,0 +1,9 @@
+$ kubectl get pods -n shopnow -l app=email-worker
+NAME                            READY   STATUS                       RESTARTS   AGE
+email-worker-6b7c8d9f54-7n2xq   0/1     CreateContainerConfigError   0          4m37s
+email-worker-6b7c8d9f54-mk8pl   0/1     CreateContainerConfigError   0          4m37s
+
+$ kubectl get pods -n shopnow -o wide -l app=email-worker
+NAME                            READY   STATUS                       RESTARTS   AGE    IP           NODE
+email-worker-6b7c8d9f54-7n2xq   0/1     CreateContainerConfigError   0          4m37s   10.24.1.44   gke-shopnow-default-pool-a1b2c3d4-xz12
+email-worker-6b7c8d9f54-mk8pl   0/1     CreateContainerConfigError   0          4m37s   10.24.3.18   gke-shopnow-default-pool-a1b2c3d4-kt03

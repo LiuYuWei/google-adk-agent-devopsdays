@@ -1,0 +1,14 @@
+$ kubectl get pods -n shopnow
+NAME                               READY   STATUS             RESTARTS        AGE
+frontend-6c8b9d7f4d-4kq9n          1/1     Running            0               3d4h
+frontend-6c8b9d7f4d-zr7mx          1/1     Running            0               3d4h
+order-service-5f6d8c9b7a-8wxlp     1/1     Running            0               3d4h
+payment-api-7d9f8c6b54-2xk4p       0/1     CrashLoopBackOff   6 (38s ago)     7m12s
+payment-api-7d9f8c6b54-9hd2t       0/1     CrashLoopBackOff   6 (45s ago)     7m12s
+postgres-0                         1/1     Running            0               12d
+redis-master-0                     1/1     Running            0               12d
+
+$ kubectl get pods -n shopnow -o wide -l app=payment-api
+NAME                           READY   STATUS             RESTARTS      AGE   IP           NODE
+payment-api-7d9f8c6b54-2xk4p   0/1     CrashLoopBackOff   6 (38s ago)   7m    10.24.1.37   gke-shopnow-default-pool-a1b2c3d4-xz12
+payment-api-7d9f8c6b54-9hd2t   0/1     CrashLoopBackOff   6 (45s ago)   7m    10.24.2.51   gke-shopnow-default-pool-a1b2c3d4-pl88

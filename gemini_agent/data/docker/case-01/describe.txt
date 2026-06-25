@@ -1,0 +1,78 @@
+$ docker inspect shopnow-api
+[
+    {
+        "Id": "3f9a1c7b8e22a4d5f1b09c7e3a6d2f48b1c0e9a7d6f54321bcde0987654321ab",
+        "Created": "2026-06-25T09:14:02.184763201+08:00",
+        "Path": "uvicorn",
+        "Args": [
+            "app.main:app",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "8000"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 1,
+            "Error": "",
+            "StartedAt": "2026-06-25T09:14:02.731905884+08:00",
+            "FinishedAt": "2026-06-25T09:14:03.402518770+08:00"
+        },
+        "Image": "sha256:c7e9a1b3d6f80452a9c1e7b4d20f5a836e9c0b1a7d4f6520983ab1cd45ef6701",
+        "Name": "/shopnow-api",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "Config": {
+            "Hostname": "3f9a1c7b8e22",
+            "ExposedPorts": {
+                "8000/tcp": {}
+            },
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin",
+                "LANG=C.UTF-8",
+                "PYTHON_VERSION=3.13.2",
+                "APP_ENV=production",
+                "REDIS_URL=redis://shopnow-redis:6379/0",
+                "LOG_LEVEL=info",
+                "PORT=8000"
+            ],
+            "Cmd": [
+                "uvicorn",
+                "app.main:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8000"
+            ],
+            "Image": "shopnow/shopnow-api:1.6.0",
+            "WorkingDir": "/app",
+            "Entrypoint": null,
+            "Labels": {
+                "com.docker.compose.project": "shopnow",
+                "com.docker.compose.service": "shopnow-api",
+                "com.docker.compose.version": "2.27.1"
+            }
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "shopnow_default": {
+                    "NetworkID": "b2d8f0a1c3e54967a8b1d2f3e4c5b6a70918273645f0e1d2c3b4a5968778695",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": ""
+                }
+            }
+        }
+    }
+]
+
+$ docker inspect --format '{{.State.ExitCode}}' shopnow-api
+1

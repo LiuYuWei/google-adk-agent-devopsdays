@@ -1,0 +1,9 @@
+$ docker compose ps
+NAME            IMAGE                       COMMAND                  SERVICE         CREATED          STATUS                     PORTS
+shopnow-api     shopnow/shopnow-api:1.6.0   "uvicorn app.main:ap…"   shopnow-api     9 seconds ago    Exited (1) 8 seconds ago
+shopnow-redis   redis:7.2-alpine            "docker-entrypoint.s…"   shopnow-redis   9 seconds ago    Up 8 seconds (healthy)     6379/tcp
+
+$ docker ps -a
+CONTAINER ID   IMAGE                       COMMAND                  CREATED          STATUS                     PORTS                    NAMES
+3f9a1c7b8e22   shopnow/shopnow-api:1.6.0   "uvicorn app.main:ap…"   9 seconds ago    Exited (1) 8 seconds ago                            shopnow-api
+a1c4e6d90b73   redis:7.2-alpine            "docker-entrypoint.s…"   9 seconds ago    Up 8 seconds (healthy)     6379/tcp                 shopnow-redis

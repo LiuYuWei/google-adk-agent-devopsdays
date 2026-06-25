@@ -1,0 +1,26 @@
+services:
+  shopnow-api:
+    image: shopnow/shopnow-api:1.6.0
+    container_name: shopnow-api
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: "production"
+      REDIS_URL: "redis://shopnow-redis:6379/0"
+      LOG_LEVEL: "info"
+      PORT: "8000"
+    depends_on:
+      shopnow-redis:
+        condition: service_healthy
+    restart: "no"
+
+  shopnow-redis:
+    image: redis:7.2-alpine
+    container_name: shopnow-redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped

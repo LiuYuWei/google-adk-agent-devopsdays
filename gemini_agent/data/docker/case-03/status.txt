@@ -1,0 +1,10 @@
+$ docker images
+REPOSITORY              TAG          IMAGE ID       CREATED         SIZE
+shopnow/shopnow-api     1.6.0        c7e9a1b3d6f8   3 days ago      214MB
+shopnow/shopnow-web     2.3.1        a4f1e8c20b73   5 days ago      88.4MB
+python                  3.13-slim    2b9c7e1a4d65   2 weeks ago     124MB
+redis                   7.2-alpine   e1f0a9c8b734   3 weeks ago     41.2MB
+postgres                16-alpine    9d7c3b1e0a52   3 weeks ago     243MB
+
+$ docker compose ps
+NAME      IMAGE     COMMAND   SERVICE   CREATED   STATUS    PORTS

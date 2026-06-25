@@ -1,0 +1,7 @@
+{
+  "id": "docker-case-04",
+  "platform": "docker",
+  "workload": "shopnow-image-processor",
+  "difficulty": "中階",
+  "files": ["status.txt", "describe.txt", "logs.txt", "events.txt", "manifest.yaml"]
+}

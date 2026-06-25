@@ -1,0 +1,18 @@
+$ kubectl get pods -n shopnow -l app=analytics-worker
+NAME                                READY   STATUS    RESTARTS   AGE
+analytics-worker-7c4d9f8b65-q8r2n   0/1     Pending   0          6m38s
+
+$ kubectl get pods -n shopnow -o wide
+NAME                                READY   STATUS    RESTARTS   AGE     IP           NODE                                     NOMINATED NODE   READINESS GATES
+analytics-worker-7c4d9f8b65-q8r2n   0/1     Pending   0          6m38s   <none>       <none>                                   <none>           <none>
+frontend-6c8b9d7f4d-4kq9n           1/1     Running   0          3d5h    10.24.1.21   gke-shopnow-default-pool-a1b2c3d4-xz12   <none>           <none>
+frontend-6c8b9d7f4d-zr7mx           1/1     Running   0          3d5h    10.24.2.18   gke-shopnow-default-pool-a1b2c3d4-pl88   <none>           <none>
+order-service-5f6d8c9b7a-8wxlp      1/1     Running   0          3d5h    10.24.3.27   gke-shopnow-default-pool-a1b2c3d4-kt03   <none>           <none>
+postgres-0                          1/1     Running   0          12d     10.24.1.9    gke-shopnow-default-pool-a1b2c3d4-xz12   <none>           <none>
+redis-master-0                      1/1     Running   0          12d     10.24.2.7    gke-shopnow-default-pool-a1b2c3d4-pl88   <none>           <none>
+
+$ kubectl get nodes
+NAME                                     STATUS   ROLES    AGE   VERSION
+gke-shopnow-default-pool-a1b2c3d4-xz12   Ready    <none>   18d   v1.30.4-gke.1348000
+gke-shopnow-default-pool-a1b2c3d4-pl88   Ready    <none>   18d   v1.30.4-gke.1348000
+gke-shopnow-default-pool-a1b2c3d4-kt03   Ready    <none>   18d   v1.30.4-gke.1348000

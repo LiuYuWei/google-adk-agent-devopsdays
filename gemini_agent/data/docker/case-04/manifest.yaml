@@ -1,0 +1,25 @@
+services:
+  shopnow-image-processor:
+    image: shopnow/shopnow-image-processor:2.3.1
+    container_name: shopnow-image-processor
+    command: ["python", "-m", "worker.run", "--queue", "image-batches"]
+    mem_limit: 256m
+    environment:
+      APP_ENV: "production"
+      REDIS_URL: "redis://shopnow-redis:6379/0"
+      BATCH_QUEUE: "image-batches"
+      LOG_LEVEL: "info"
+    depends_on:
+      shopnow-redis:
+        condition: service_healthy
+    restart: "no"
+
+  shopnow-redis:
+    image: redis:7.2-alpine
+    container_name: shopnow-redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped

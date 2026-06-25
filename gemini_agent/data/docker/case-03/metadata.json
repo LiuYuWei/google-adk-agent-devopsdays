@@ -1,0 +1,7 @@
+{
+  "id": "docker-case-03",
+  "platform": "docker",
+  "workload": "shopnow-report-gen",
+  "difficulty": "中階",
+  "files": ["status.txt", "describe.txt", "logs.txt", "events.txt", "manifest.yaml"]
+}

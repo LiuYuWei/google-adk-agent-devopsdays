@@ -1,0 +1,5 @@
+$ kubectl logs order-service-6b7c8d9e0f-q4m2x -n shopnow
+Error from server (BadRequest): container "order-service" in pod "order-service-6b7c8d9e0f-q4m2x" is waiting to start: trying and failing to pull image
+
+$ kubectl logs order-service-6b7c8d9e0f-q4m2x -n shopnow --previous
+Error from server (BadRequest): previous terminated container "order-service" in pod "order-service-6b7c8d9e0f-q4m2x" not found

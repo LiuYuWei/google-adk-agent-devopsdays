@@ -1,0 +1,17 @@
+$ kubectl get events -n shopnow --sort-by=.lastTimestamp --field-selector involvedObject.name=email-worker-6b7c8d9f54-7n2xq
+LAST SEEN   TYPE      REASON      OBJECT                               MESSAGE
+4m43s       Normal    Scheduled   pod/email-worker-6b7c8d9f54-7n2xq    Successfully assigned shopnow/email-worker-6b7c8d9f54-7n2xq to gke-shopnow-default-pool-a1b2c3d4-xz12
+3m1s        Normal    Pulled      pod/email-worker-6b7c8d9f54-7n2xq    Container image "gcr.io/shopnow-prod/email-worker:1.2.0" already present on machine
+3m1s        Warning   Failed      pod/email-worker-6b7c8d9f54-7n2xq    Error: secret "smtp-credentials" not found
+
+$ kubectl get secret -n shopnow
+NAME                      TYPE     DATA   AGE
+order-db-credentials      Opaque   1      12d
+payment-db-credentials    Opaque   1      12d
+registry-pull-secret      kubernetes.io/dockerconfigjson   1   12d
+
+$ kubectl get configmap -n shopnow
+NAME               DATA   AGE
+app-settings       4      12d
+kube-root-ca.crt   1      12d
+nginx-conf         1      12d

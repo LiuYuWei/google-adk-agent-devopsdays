@@ -1,0 +1,5 @@
+$ kubectl logs email-worker-6b7c8d9f54-7n2xq -n shopnow
+Error from server (BadRequest): container "email-worker" in pod "email-worker-6b7c8d9f54-7n2xq" is waiting to start: CreateContainerConfigError
+
+$ kubectl logs email-worker-6b7c8d9f54-7n2xq -n shopnow --previous
+Error from server (BadRequest): previous terminated container "email-worker" in pod "email-worker-6b7c8d9f54-7n2xq" not found

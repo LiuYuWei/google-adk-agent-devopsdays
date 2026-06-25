@@ -1,0 +1,12 @@
+$ docker compose up -d shopnow-frontend
+[+] Running 1/2
+ ✔ Container shopnow-redis      Running                                     0.0s
+ ⠿ Container shopnow-frontend  Starting                                     0.4s
+Error response from daemon: driver failed programming external connectivity on endpoint shopnow-frontend (c1e4a8f6b2d70a93f5c8e1b7d4a2960f3e8c5b1d9a6f0e2c4b7d3a18f069e5c2): Bind for 0.0.0.0:8080 failed: port is already allocated
+
+$ docker start shopnow-frontend
+Error response from daemon: driver failed programming external connectivity on endpoint shopnow-frontend (c1e4a8f6b2d70a93f5c8e1b7d4a2960f3e8c5b1d9a6f0e2c4b7d3a18f069e5c2): Bind for 0.0.0.0:8080 failed: port is already allocated
+Error: failed to start containers: shopnow-frontend
+
+$ docker logs shopnow-frontend
+$

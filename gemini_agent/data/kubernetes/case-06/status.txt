@@ -1,0 +1,9 @@
+$ kubectl get pods -n shopnow -l app=notification-service
+NAME                                    READY   STATUS    RESTARTS        AGE
+notification-service-6b7d9c8f54-7m2xq   1/1     Running   7 (45s ago)     32m
+notification-service-6b7d9c8f54-q9jlt   1/1     Running   8 (38s ago)     32m
+
+$ kubectl get pods -n shopnow -o wide -l app=notification-service
+NAME                                    READY   STATUS    RESTARTS      AGE   IP           NODE                                     NOMINATED NODE   READINESS GATES
+notification-service-6b7d9c8f54-7m2xq   1/1     Running   7 (45s ago)   32m   10.24.1.88   gke-shopnow-default-pool-a1b2c3d4-xz12   <none>           <none>
+notification-service-6b7d9c8f54-q9jlt   1/1     Running   8 (38s ago)   32m   10.24.3.42   gke-shopnow-default-pool-a1b2c3d4-kt03   <none>           <none>

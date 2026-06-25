@@ -1,0 +1,71 @@
+$ docker inspect legacy-dashboard --format '{{json .NetworkSettings.Ports}}'
+{"80/tcp":[{"HostIp":"0.0.0.0","HostPort":"8080"},{"HostIp":"::","HostPort":"8080"}]}
+
+$ docker inspect legacy-dashboard --format '{{json .HostConfig.PortBindings}}'
+{"80/tcp":[{"HostIp":"","HostPort":"8080"}]}
+
+$ docker inspect legacy-dashboard
+[
+    {
+        "Id": "b7d2f1a9c3e49f0a1d6b8c2e7f3a5d91c4b6e8a0f2d7c1b3e5a9f4d6c8b2a1e0",
+        "Created": "2026-06-22T03:11:48.226517301Z",
+        "Path": "/docker-entrypoint.sh",
+        "Args": ["nginx", "-g", "daemon off;"],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 48213,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-06-22T03:11:49.014772910Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Name": "/legacy-dashboard",
+        "HostConfig": {
+            "PortBindings": {
+                "80/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "8080"
+                    }
+                ]
+            },
+            "NetworkMode": "bridge",
+            "RestartPolicy": {
+                "Name": "unless-stopped",
+                "MaximumRetryCount": 0
+            }
+        },
+        "Config": {
+            "Hostname": "b7d2f1a9c3e4",
+            "ExposedPorts": {
+                "80/tcp": {}
+            },
+            "Image": "shopnow/legacy-dashboard:0.9.3"
+        },
+        "NetworkSettings": {
+            "Ports": {
+                "80/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "8080"
+                    },
+                    {
+                        "HostIp": "::",
+                        "HostPort": "8080"
+                    }
+                ]
+            },
+            "IPAddress": "172.17.0.2"
+        }
+    }
+]
+
+$ sudo lsof -i :8080
+COMMAND     PID  USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+docker-pr 48190  root    7u  IPv4 0xa3f1c7d29e80b41      0t0  TCP *:http-alt (LISTEN)
+docker-pr 48197  root    7u  IPv6 0xb52d8e1af93c620      0t0  TCP *:http-alt (LISTEN)

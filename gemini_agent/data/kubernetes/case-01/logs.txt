@@ -1,0 +1,30 @@
+$ kubectl logs payment-api-7d9f8c6b54-2xk4p -n shopnow
+INFO:     shopnow.payment_api.config — Loading application configuration (APP_ENV=production)
+INFO:     shopnow.payment_api.config — REDIS_URL=redis://redis-master:6379
+ERROR:    shopnow.payment_api.config — Required environment variable 'DATABASE_URL' is not set
+Traceback (most recent call last):
+  File "/app/payment_api/main.py", line 18, in <module>
+    settings = Settings()
+               ^^^^^^^^^^
+  File "/usr/local/lib/python3.13/site-packages/pydantic_settings/main.py", line 171, in __init__
+    super().__init__(
+  File "/usr/local/lib/python3.13/site-packages/pydantic/main.py", line 253, in __init__
+    validated_self = __pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Settings
+database_url
+  Field required [type=missing, input_value={'app_env': 'production', 'redis_url': 'redis://redis-master:6379'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing
+
+$ kubectl logs payment-api-7d9f8c6b54-2xk4p -n shopnow --previous
+INFO:     shopnow.payment_api.config — Loading application configuration (APP_ENV=production)
+INFO:     shopnow.payment_api.config — REDIS_URL=redis://redis-master:6379
+ERROR:    shopnow.payment_api.config — Required environment variable 'DATABASE_URL' is not set
+Traceback (most recent call last):
+  File "/app/payment_api/main.py", line 18, in <module>
+    settings = Settings()
+               ^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Settings
+database_url
+  Field required [type=missing, input_value={'app_env': 'production', 'redis_url': 'redis://redis-master:6379'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/missing

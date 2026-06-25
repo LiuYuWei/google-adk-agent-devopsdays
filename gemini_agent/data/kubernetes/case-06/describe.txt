@@ -1,0 +1,68 @@
+$ kubectl describe pod notification-service-6b7d9c8f54-7m2xq -n shopnow
+Name:             notification-service-6b7d9c8f54-7m2xq
+Namespace:        shopnow
+Priority:         0
+Service Account:  notification-service-sa
+Node:             gke-shopnow-default-pool-a1b2c3d4-xz12/10.140.0.5
+Start Time:       Thu, 25 Jun 2026 09:48:11 +0800
+Labels:           app=notification-service
+                  pod-template-hash=6b7d9c8f54
+Annotations:      <none>
+Status:           Running
+IP:               10.24.1.88
+IPs:
+  IP:           10.24.1.88
+Controlled By:  ReplicaSet/notification-service-6b7d9c8f54
+Containers:
+  notification-service:
+    Container ID:   containerd://7c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f60718293a4b5c6d7e8f90a1b2c3d4e5f
+    Image:          gcr.io/shopnow-prod/notification-service:3.1.0
+    Image ID:       gcr.io/shopnow-prod/notification-service@sha256:1a2b3c4d5e60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8f9012
+    Port:           8084/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Thu, 25 Jun 2026 10:19:43 +0800
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    143
+      Started:      Thu, 25 Jun 2026 10:18:55 +0800
+      Finished:     Thu, 25 Jun 2026 10:19:42 +0800
+    Ready:          True
+    Restart Count:  8
+    Limits:
+      cpu:     500m
+      memory:  256Mi
+    Requests:
+      cpu:     250m
+      memory:  128Mi
+    Liveness:   http-get http://:8084/health delay=10s timeout=1s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:8084/healthz delay=5s timeout=1s period=10s #success=1 #failure=3
+    Environment:
+      APP_ENV:    production
+      LOG_LEVEL:  info
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9k4mz (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-9k4mz:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                     From               Message
+  ----     ------     ----                    ----               -------
+  Normal   Scheduled  32m                     default-scheduler  Successfully assigned shopnow/notification-service-6b7d9c8f54-7m2xq to gke-shopnow-default-pool-a1b2c3d4-xz12
+  Normal   Pulled     32m                     kubelet            Successfully pulled image "gcr.io/shopnow-prod/notification-service:3.1.0" in 5.331s (5.331s including waiting)
+  Normal   Created    4m12s (x9 over 32m)     kubelet            Created container notification-service
+  Normal   Started    4m11s (x9 over 32m)     kubelet            Started container notification-service
+  Normal   Pulled     4m12s (x8 over 31m)     kubelet            Container image "gcr.io/shopnow-prod/notification-service:3.1.0" already present on machine
+  Warning  Unhealthy  2m31s (x27 over 31m)    kubelet            Liveness probe failed: HTTP probe failed with statuscode: 404
+  Normal   Killing    2m31s (x9 over 31m)     kubelet            Container notification-service failed liveness probe, will be restarted
