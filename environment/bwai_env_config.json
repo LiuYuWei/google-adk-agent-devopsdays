@@ -1,0 +1,54 @@
+{
+  "name": "ADK Gemini Agent Workshop 環境設定",
+  "description": "依序完成 Gemini CLI 認證、GCP 登入、促銷抵免額確認、API 啟用、Python 環境初始化",
+  "steps": [
+    {
+      "id": "gemini-cli-auth",
+      "type": "gemini_cli_vertex_auth",
+      "description": "Step 1：設定 Gemini CLI Vertex AI 認證",
+      "params": {
+        "persist_to": "~/.gemini/.env",
+        "location_default": "us-central1",
+        "check_conflicting_keys": true
+      }
+    },
+    {
+      "id": "auth",
+      "type": "gcloud_auth",
+      "description": "Step 2：Google Cloud 登入與專案設定",
+      "params": {
+        "require_project": true
+      }
+    },
+    {
+      "id": "check-billing-credit",
+      "type": "gcp_billing_credit",
+      "description": "Step 3：排查 GCP 專案是否已綁定 Workshop 促銷抵免額",
+      "params": {
+        "expected_credit_usd": 5
+      }
+    },
+    {
+      "id": "enable-apis",
+      "type": "gcloud_enable_apis",
+      "description": "Step 4：啟用 Cloud Run 部署所需的 APIs",
+      "params": {
+        "apis": [
+          "run.googleapis.com",
+          "cloudbuild.googleapis.com",
+          "artifactregistry.googleapis.com",
+          "aiplatform.googleapis.com"
+        ]
+      }
+    },
+    {
+      "id": "python-setup",
+      "type": "python_venv",
+      "description": "Step 5：建立虛擬環境並安裝依賴",
+      "params": {
+        "venv_dir": ".venv",
+        "requirements_file": "requirements.txt"
+      }
+    }
+  ]
+}
