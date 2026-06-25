@@ -1,0 +1,18 @@
+$ kubectl get events -n shopnow --sort-by=.lastTimestamp --field-selector involvedObject.name=notification-service-6b7d9c8f54-7m2xq
+LAST SEEN   TYPE      REASON      OBJECT                                       MESSAGE
+32m         Normal    Scheduled   pod/notification-service-6b7d9c8f54-7m2xq    Successfully assigned shopnow/notification-service-6b7d9c8f54-7m2xq to gke-shopnow-default-pool-a1b2c3d4-xz12
+32m         Normal    Pulled      pod/notification-service-6b7d9c8f54-7m2xq    Successfully pulled image "gcr.io/shopnow-prod/notification-service:3.1.0" in 5.331s
+4m11s       Normal    Started     pod/notification-service-6b7d9c8f54-7m2xq    Started container notification-service
+4m12s       Normal    Created     pod/notification-service-6b7d9c8f54-7m2xq    Created container notification-service
+2m31s       Warning   Unhealthy   pod/notification-service-6b7d9c8f54-7m2xq    Liveness probe failed: HTTP probe failed with statuscode: 404
+2m31s       Normal    Killing     pod/notification-service-6b7d9c8f54-7m2xq    Container notification-service failed liveness probe, will be restarted
+
+$ kubectl exec notification-service-6b7d9c8f54-7m2xq -n shopnow -- curl -s -o /dev/null -w "%{http_code}\n" localhost:8084/health
+404
+$ kubectl exec notification-service-6b7d9c8f54-7m2xq -n shopnow -- curl -s -o /dev/null -w "%{http_code}\n" localhost:8084/healthz
+200
+
+$ kubectl get deployment notification-service -n shopnow -o jsonpath='{.spec.template.spec.containers[0].livenessProbe.httpGet.path}'
+/health
+$ kubectl get deployment notification-service -n shopnow -o jsonpath='{.spec.template.spec.containers[0].readinessProbe.httpGet.path}'
+/healthz

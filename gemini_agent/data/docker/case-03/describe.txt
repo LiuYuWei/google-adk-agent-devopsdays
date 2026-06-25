@@ -1,0 +1,37 @@
+$ docker image inspect shopnow-report-gen:latest
+[]
+Error: No such image: shopnow-report-gen:latest
+
+$ docker version
+Client:
+ Version:           27.1.1
+ API version:       1.46
+ Go version:        go1.21.12
+ Git commit:        6312585
+ Built:             Tue Jul 23 19:57:00 2024
+ OS/Arch:           linux/arm64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          27.1.1
+  API version:      1.46 (minimum version 1.24)
+  Go version:       go1.21.12
+  Git commit:       cc13f95
+  Built:            Tue Jul 23 19:57:00 2024
+  OS/Arch:          linux/arm64
+  Experimental:     false
+ containerd:
+  Version:          1.7.19
+  GitCommit:        2bf793ef6dc9a18e00cb12efb64355c2c9d5eb41
+ runc:
+  Version:          1.7.19
+  GitCommit:        v1.1.13-0-g58aa920
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+
+$ docker buildx ls
+NAME/NODE         DRIVER/ENDPOINT   STATUS    BUILDKIT   PLATFORMS
+default*          docker
+ \_ default       \_ default        running   v0.15.1    linux/arm64, linux/amd64, linux/amd64/v2

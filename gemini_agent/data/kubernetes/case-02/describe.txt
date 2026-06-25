@@ -1,0 +1,48 @@
+$ kubectl describe pod order-service-6b7c8d9e0f-q4m2x -n shopnow
+Name:             order-service-6b7c8d9e0f-q4m2x
+Namespace:        shopnow
+Priority:         0
+Service Account:  default
+Node:             gke-shopnow-default-pool-a1b2c3d4-pl88/10.140.0.6
+Start Time:       Thu, 25 Jun 2026 11:30:14 +0800
+Labels:           app=order-service
+                  pod-template-hash=6b7c8d9e0f
+Status:           Pending
+IP:               10.24.2.63
+Containers:
+  order-service:
+    Container ID:
+    Image:          gcr.io/shopnow-prod/order-service:1.8.0
+    Image ID:
+    Port:           8081/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     1
+      memory:  512Mi
+    Requests:
+      cpu:     500m
+      memory:  256Mi
+    Environment:
+      DATABASE_URL:  <set to the key 'DATABASE_URL' in secret 'order-db-credentials'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9k3lp (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+QoS Class:          Burstable
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  5m1s                   default-scheduler  Successfully assigned shopnow/order-service-6b7c8d9e0f-q4m2x to gke-shopnow-default-pool-a1b2c3d4-pl88
+  Normal   Pulling    3m22s (x4 over 5m)     kubelet            Pulling image "gcr.io/shopnow-prod/order-service:1.8.0"
+  Warning  Failed     3m18s (x4 over 4m56s)  kubelet            Failed to pull image "gcr.io/shopnow-prod/order-service:1.8.0": rpc error: code = NotFound desc = failed to pull and unpack image "gcr.io/shopnow-prod/order-service:1.8.0": failed to resolve reference "gcr.io/shopnow-prod/order-service:1.8.0": gcr.io/shopnow-prod/order-service:1.8.0: not found
+  Warning  Failed     3m18s (x4 over 4m56s)  kubelet            Error: ErrImagePull
+  Normal   BackOff    2m51s (x7 over 4m55s)  kubelet            Back-off pulling image "gcr.io/shopnow-prod/order-service:1.8.0"
+  Warning  Failed     12s (x18 over 4m55s)   kubelet            Error: ImagePullBackOff

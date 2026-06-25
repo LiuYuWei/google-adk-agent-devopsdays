@@ -1,0 +1,7 @@
+{
+  "id": "docker-case-02",
+  "platform": "docker",
+  "workload": "shopnow-frontend",
+  "difficulty": "入門",
+  "files": ["status.txt", "describe.txt", "logs.txt", "events.txt", "manifest.yaml"]
+}

@@ -1,0 +1,18 @@
+$ kubectl get events -n shopnow --sort-by=.lastTimestamp --field-selector involvedObject.name=order-service-6b7c8d9e0f-q4m2x
+LAST SEEN   TYPE      REASON    OBJECT                              MESSAGE
+5m1s        Normal    Scheduled pod/order-service-6b7c8d9e0f-q4m2x  Successfully assigned shopnow/order-service-6b7c8d9e0f-q4m2x to gke-shopnow-default-pool-a1b2c3d4-pl88
+3m22s       Normal    Pulling   pod/order-service-6b7c8d9e0f-q4m2x  Pulling image "gcr.io/shopnow-prod/order-service:1.8.0"
+3m18s       Warning   Failed    pod/order-service-6b7c8d9e0f-q4m2x  Failed to pull image "gcr.io/shopnow-prod/order-service:1.8.0": rpc error: code = NotFound desc = failed to resolve reference "gcr.io/shopnow-prod/order-service:1.8.0": not found
+2m51s       Normal    BackOff   pod/order-service-6b7c8d9e0f-q4m2x  Back-off pulling image "gcr.io/shopnow-prod/order-service:1.8.0"
+12s         Warning   Failed    pod/order-service-6b7c8d9e0f-q4m2x  Error: ImagePullBackOff
+
+$ gcloud container images list-tags gcr.io/shopnow-prod/order-service --limit=10 --sort-by=~timestamp
+DIGEST        TAGS           TIMESTAMP
+a1b2c3d4e5f6  1.7.3,latest   2026-06-24T09:14:22
+f6e5d4c3b2a1  1.7.2          2026-06-18T15:02:41
+0a1b2c3d4e5f  1.7.1          2026-06-10T11:48:03
+5f4e3d2c1b0a  1.7.0          2026-06-02T08:30:55
+9z8y7x6w5v4u  1.6.5          2026-05-21T17:21:10
+
+$ docker pull gcr.io/shopnow-prod/order-service:1.8.0
+Error response from daemon: manifest for gcr.io/shopnow-prod/order-service:1.8.0 not found: manifest unknown: Failed to fetch "1.8.0"

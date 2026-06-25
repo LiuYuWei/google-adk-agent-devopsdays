@@ -1,0 +1,9 @@
+$ docker events --since 30m --until now
+2026-06-25T14:32:07.118453021+08:00 container create 9a3f6c2d71b8d4e0a5c8f2b1e7d3a690c4b8e1f5d2a7c93f0e6b4d8a1c5f2e30 (image=nginx:1.25-alpine, name=shopnow-frontend, com.docker.compose.project=shopnow, com.docker.compose.service=shopnow-frontend)
+2026-06-25T14:32:07.339218764+08:00 network connect 7b2e9c4f1a08d63e5b7c0a9f3d281e64b5a8c2f7d0e3b916a4c8f5d2e70b1a39 (container=9a3f6c2d71b8, name=shopnow_default, type=bridge)
+2026-06-25T14:32:07.604872193+08:00 container start 9a3f6c2d71b8d4e0a5c8f2b1e7d3a690c4b8e1f5d2a7c93f0e6b4d8a1c5f2e30 (image=nginx:1.25-alpine, name=shopnow-frontend) error
+2026-06-25T14:32:07.609145882+08:00 network disconnect 7b2e9c4f1a08d63e5b7c0a9f3d281e64b5a8c2f7d0e3b916a4c8f5d2e70b1a39 (container=9a3f6c2d71b8, name=shopnow_default, type=bridge)
+
+$ ss -ltnp | grep :8080
+LISTEN 0      4096         0.0.0.0:8080       0.0.0.0:*    users:(("docker-proxy",pid=48190,fd=7))
+LISTEN 0      4096            [::]:8080          [::]:*    users:(("docker-proxy",pid=48197,fd=7))

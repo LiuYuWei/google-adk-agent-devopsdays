@@ -1,0 +1,45 @@
+$ kubectl describe pod analytics-worker-7c4d9f8b65-q8r2n -n shopnow
+Name:             analytics-worker-7c4d9f8b65-q8r2n
+Namespace:        shopnow
+Priority:         0
+Service Account:  default
+Node:             <none>
+Labels:           app=analytics-worker
+                  pod-template-hash=7c4d9f8b65
+Annotations:      <none>
+Status:           Pending
+IP:
+IPs:              <none>
+Controlled By:    ReplicaSet/analytics-worker-7c4d9f8b65
+Containers:
+  analytics-worker:
+    Image:      gcr.io/shopnow-prod/analytics-worker:0.9.4
+    Port:       9000/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     8
+      memory:  2Gi
+    Requests:
+      cpu:     8
+      memory:  2Gi
+    Environment:
+      APP_ENV:    production
+      LOG_LEVEL:  info
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-c4m9x (ro)
+Conditions:
+  Type           Status
+  PodScheduled   False
+Volumes:
+  kube-api-access-c4m9x:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+QoS Class:                   Guaranteed
+Node-Selectors:              disktype=ssd
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason            Age                    From               Message
+  ----     ------            ----                   ----               -------
+  Warning  FailedScheduling  6m41s                  default-scheduler  0/3 nodes are available: 3 Insufficient cpu, 3 node(s) didn't match Pod's node affinity/selector. preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+  Warning  FailedScheduling  91s (x2 over 6m1s)     default-scheduler  0/3 nodes are available: 3 Insufficient cpu, 3 node(s) didn't match Pod's node affinity/selector. preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.

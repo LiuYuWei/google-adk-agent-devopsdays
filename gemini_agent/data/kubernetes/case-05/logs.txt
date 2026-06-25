@@ -1,0 +1,5 @@
+$ kubectl logs analytics-worker-7c4d9f8b65-q8r2n -n shopnow
+Error from server (BadRequest): container "analytics-worker" in pod "analytics-worker-7c4d9f8b65-q8r2n" is waiting to start: ContainerCreating
+
+$ kubectl logs analytics-worker-7c4d9f8b65-q8r2n -n shopnow --previous
+Error from server (BadRequest): previous terminated container "analytics-worker" in pod "analytics-worker-7c4d9f8b65-q8r2n" not found

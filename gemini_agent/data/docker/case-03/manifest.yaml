@@ -1,0 +1,42 @@
+services:
+  shopnow-report-gen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: shopnow-report-gen:latest
+    container_name: shopnow-report-gen
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      LOG_LEVEL: info
+      REPORT_OUTPUT_DIR: /data/reports
+      DATABASE_URL: postgresql://reporter@shopnow-db:5432/shopnow
+    ports:
+      - "8080:8080"
+    volumes:
+      - report-data:/data/reports
+    depends_on:
+      - shopnow-db
+    networks:
+      - shopnow
+
+  shopnow-db:
+    image: postgres:16-alpine
+    container_name: shopnow-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: reporter
+      POSTGRES_DB: shopnow
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - shopnow
+
+volumes:
+  report-data:
+  db-data:
+
+networks:
+  shopnow:
+    driver: bridge

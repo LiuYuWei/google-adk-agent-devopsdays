@@ -1,0 +1,9 @@
+$ kubectl get pods -n shopnow -l app=recommendation-engine
+NAME                                     READY   STATUS             RESTARTS         AGE
+recommendation-engine-6f7b8c9d54-7m2qx   1/1     Running            11 (62s ago)     3h41m
+recommendation-engine-6f7b8c9d54-vk5tp   0/1     CrashLoopBackOff   12 (48s ago)     3h41m
+
+$ kubectl get pods -n shopnow -o wide -l app=recommendation-engine
+NAME                                     READY   STATUS             RESTARTS       AGE     IP           NODE                                     NOMINATED NODE   READINESS GATES
+recommendation-engine-6f7b8c9d54-7m2qx   1/1     Running            11 (62s ago)   3h41m   10.24.1.88   gke-shopnow-default-pool-a1b2c3d4-xz12   <none>           <none>
+recommendation-engine-6f7b8c9d54-vk5tp   0/1     CrashLoopBackOff   12 (48s ago)   3h41m   10.24.3.42   gke-shopnow-default-pool-a1b2c3d4-kt03   <none>           <none>

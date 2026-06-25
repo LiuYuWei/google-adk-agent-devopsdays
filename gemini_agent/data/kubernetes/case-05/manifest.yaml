@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analytics-worker
+  namespace: shopnow
+  labels:
+    app: analytics-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: analytics-worker
+  template:
+    metadata:
+      labels:
+        app: analytics-worker
+    spec:
+      nodeSelector:
+        disktype: ssd
+      containers:
+        - name: analytics-worker
+          image: gcr.io/shopnow-prod/analytics-worker:0.9.4
+          ports:
+            - containerPort: 9000
+          env:
+            - name: APP_ENV
+              value: "production"
+            - name: LOG_LEVEL
+              value: "info"
+          resources:
+            requests:
+              cpu: "8"
+              memory: 2Gi
+            limits:
+              cpu: "8"
+              memory: 2Gi

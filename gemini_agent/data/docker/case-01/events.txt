@@ -1,0 +1,4 @@
+$ docker events --since 1h --until now --filter container=shopnow-api
+2026-06-25T09:14:02.190112457+08:00 container create 3f9a1c7b8e22a4d5f1b09c7e3a6d2f48b1c0e9a7d6f54321bcde0987654321ab (com.docker.compose.project=shopnow, com.docker.compose.service=shopnow-api, image=shopnow/shopnow-api:1.6.0, name=shopnow-api)
+2026-06-25T09:14:02.733460129+08:00 container start 3f9a1c7b8e22a4d5f1b09c7e3a6d2f48b1c0e9a7d6f54321bcde0987654321ab (com.docker.compose.project=shopnow, com.docker.compose.service=shopnow-api, image=shopnow/shopnow-api:1.6.0, name=shopnow-api)
+2026-06-25T09:14:03.405271884+08:00 container die 3f9a1c7b8e22a4d5f1b09c7e3a6d2f48b1c0e9a7d6f54321bcde0987654321ab (com.docker.compose.project=shopnow, com.docker.compose.service=shopnow-api, exitCode=1, image=shopnow/shopnow-api:1.6.0, name=shopnow-api)

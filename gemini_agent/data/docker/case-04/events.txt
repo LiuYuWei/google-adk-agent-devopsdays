@@ -1,0 +1,21 @@
+$ docker events --since 30m --filter container=shopnow-image-processor
+2026-06-25T14:02:11.560331742+08:00 container create 7b3e1f0a9d44c2e8b5a91f3d6072c4e98a1b0d7f5e6432198cba0fedcba01234 (com.docker.compose.project=shopnow, com.docker.compose.service=shopnow-image-processor, image=shopnow/shopnow-image-processor:2.3.1, name=shopnow-image-processor)
+2026-06-25T14:02:12.090114863+08:00 container start 7b3e1f0a9d44c2e8b5a91f3d6072c4e98a1b0d7f5e6432198cba0fedcba01234 (com.docker.compose.project=shopnow, com.docker.compose.service=shopnow-image-processor, image=shopnow/shopnow-image-processor:2.3.1, name=shopnow-image-processor)
+2026-06-25T14:02:34.901773055+08:00 container oom 7b3e1f0a9d44c2e8b5a91f3d6072c4e98a1b0d7f5e6432198cba0fedcba01234 (com.docker.compose.project=shopnow, com.docker.compose.service=shopnow-image-processor, image=shopnow/shopnow-image-processor:2.3.1, name=shopnow-image-processor)
+2026-06-25T14:02:34.920448190+08:00 container die 7b3e1f0a9d44c2e8b5a91f3d6072c4e98a1b0d7f5e6432198cba0fedcba01234 (com.docker.compose.project=shopnow, com.docker.compose.service=shopnow-image-processor, exitCode=137, image=shopnow/shopnow-image-processor:2.3.1, name=shopnow-image-processor)
+
+$ docker stats --no-stream shopnow-image-processor
+CONTAINER ID   NAME                      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O         PIDS
+7b3e1f0a9d44   shopnow-image-processor   84.21%    254.8MiB / 256MiB     99.53%    1.21MB / 88.4kB   142MB / 0B        9
+
+$ dmesg | tail
+[124518.337201] python invoked oom-killer: gfp_mask=0x1100cca(GFP_HIGHUSER_MOVABLE), order=0, oom_score_adj=0
+[124518.337215] memory: usage 262144kB, limit 262144kB, failcnt 1187
+[124518.337219] memory+swap: usage 262144kB, limit 262144kB, failcnt 0
+[124518.337221] Memory cgroup stats for /docker/7b3e1f0a9d44c2e8b5a91f3d6072c4e98a1b0d7f5e6432198cba0fedcba01234:
+[124518.337402] Tasks state (memory values in pages):
+[124518.337404] [  pid  ]   uid  tgid total_vm      rss  pgtables_bytes swapents oom_score_adj name
+[124518.337511] [  23187] 65532 23187   312744    65210     1056768        0             0 python
+[124518.337540] oom-kill:constraint=CONSTRAINT_MEMCG,nodemask=(null),cpuset=7b3e1f0a9d44,mems_allowed=0,oom_memcg=/docker/7b3e1f0a9d44,task_memcg=/docker/7b3e1f0a9d44,task=python,pid=23187,uid=65532
+[124518.337559] Memory cgroup out of memory: Killed process 23187 (python) total-vm:1250976kB, anon-rss:258788kB, file-rss:1264kB, shmem-rss:788kB, UID:65532 pgtables:1032kB oom_score_adj:0
+[124518.339884] oom_reaper: reaped process 23187 (python), now anon-rss:0kB, file-rss:0kB, shmem-rss:0kB

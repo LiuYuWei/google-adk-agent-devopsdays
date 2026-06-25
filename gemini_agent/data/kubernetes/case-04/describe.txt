@@ -1,0 +1,58 @@
+$ kubectl describe pod email-worker-6b7c8d9f54-7n2xq -n shopnow
+Name:             email-worker-6b7c8d9f54-7n2xq
+Namespace:        shopnow
+Priority:         0
+Service Account:  default
+Node:             gke-shopnow-default-pool-a1b2c3d4-xz12/10.140.0.5
+Start Time:       Thu, 25 Jun 2026 14:03:11 +0800
+Labels:           app=email-worker
+                  pod-template-hash=6b7c8d9f54
+Annotations:      <none>
+Status:           Pending
+IP:               10.24.1.44
+IPs:
+  IP:           10.24.1.44
+Controlled By:  ReplicaSet/email-worker-6b7c8d9f54
+Containers:
+  email-worker:
+    Container ID:
+    Image:          gcr.io/shopnow-prod/email-worker:1.2.0
+    Image ID:
+    Port:           8083/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       CreateContainerConfigError
+    Ready:          False
+    Restart Count:  0
+    Limits:
+      cpu:     500m
+      memory:  256Mi
+    Requests:
+      cpu:     250m
+      memory:  128Mi
+    Environment:
+      APP_ENV:        production
+      SMTP_HOST:      smtp.shopnow.internal
+      SMTP_PASSWORD:  <set to the key 'password' in secret 'smtp-credentials'>  Optional: false
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-q9w8e (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  kube-api-access-q9w8e:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+QoS Class:                   Burstable
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                   From               Message
+  ----     ------     ----                  ----               -------
+  Normal   Scheduled  4m43s                 default-scheduler  Successfully assigned shopnow/email-worker-6b7c8d9f54-7n2xq to gke-shopnow-default-pool-a1b2c3d4-xz12
+  Normal   Pulled     3m1s (x9 over 4m41s)  kubelet            Container image "gcr.io/shopnow-prod/email-worker:1.2.0" already present on machine
+  Warning  Failed     3m1s (x9 over 4m41s)  kubelet            Error: secret "smtp-credentials" not found

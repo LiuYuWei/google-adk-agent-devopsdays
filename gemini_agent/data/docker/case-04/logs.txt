@@ -1,0 +1,15 @@
+$ docker logs shopnow-image-processor
+INFO:     shopnow.worker.bootstrap — starting shopnow-image-processor 2.3.1 (APP_ENV=production)
+INFO:     shopnow.worker.bootstrap — connecting cache backend REDIS_URL=redis://shopnow-redis:6379/0
+INFO:     shopnow.worker.queue — subscribed to queue 'image-batches'
+INFO:     shopnow.worker.run — received batch job batch-2026-0625-0007 (20 images)
+INFO:     shopnow.worker.pipeline — Processing batch 1/20 src=catalog/raw/SKU-88421.tiff
+INFO:     shopnow.worker.pipeline — Loaded image 4500x3000 mode=RGB est=38.6MiB
+INFO:     shopnow.worker.pipeline — resize variants=[2048,1024,512] decode_ok
+INFO:     shopnow.worker.pipeline — Processing batch 2/20 src=catalog/raw/SKU-88422.tiff
+INFO:     shopnow.worker.pipeline — Loaded image 6000x4000 mode=RGB est=68.7MiB
+INFO:     shopnow.worker.pipeline — resize variants=[2048,1024,512] decode_ok
+INFO:     shopnow.worker.pipeline — Processing batch 3/20 src=catalog/raw/SKU-88423.tiff
+INFO:     shopnow.worker.pipeline — Loaded image 7680x4320 mode=RGB est=95.0MiB
+INFO:     shopnow.worker.pipeline — building high-res composite preview
+Killed

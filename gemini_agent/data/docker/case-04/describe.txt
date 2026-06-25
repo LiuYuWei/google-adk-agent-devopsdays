@@ -1,0 +1,85 @@
+$ docker inspect shopnow-image-processor
+[
+    {
+        "Id": "7b3e1f0a9d44c2e8b5a91f3d6072c4e98a1b0d7f5e6432198cba0fedcba01234",
+        "Created": "2026-06-25T14:02:11.553218904+08:00",
+        "Path": "python",
+        "Args": [
+            "-m",
+            "worker.run",
+            "--queue",
+            "image-batches"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": true,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 137,
+            "Error": "",
+            "StartedAt": "2026-06-25T14:02:12.084771630+08:00",
+            "FinishedAt": "2026-06-25T14:02:34.917602551+08:00"
+        },
+        "Image": "sha256:e9a1b3d6f80452a9c1e7b4d20f5a836e9c0b1a7d4f6520983ab1cd45ef670122",
+        "Name": "/shopnow-image-processor",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "Config": {
+            "Hostname": "7b3e1f0a9d44",
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin",
+                "LANG=C.UTF-8",
+                "PYTHON_VERSION=3.13.2",
+                "APP_ENV=production",
+                "REDIS_URL=redis://shopnow-redis:6379/0",
+                "BATCH_QUEUE=image-batches",
+                "LOG_LEVEL=info"
+            ],
+            "Cmd": [
+                "python",
+                "-m",
+                "worker.run",
+                "--queue",
+                "image-batches"
+            ],
+            "Image": "shopnow/shopnow-image-processor:2.3.1",
+            "WorkingDir": "/app",
+            "Entrypoint": null,
+            "Labels": {
+                "com.docker.compose.project": "shopnow",
+                "com.docker.compose.service": "shopnow-image-processor",
+                "com.docker.compose.version": "2.27.1"
+            }
+        },
+        "HostConfig": {
+            "NetworkMode": "shopnow_default",
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "Memory": 268435456,
+            "MemorySwap": 268435456,
+            "MemoryReservation": 0,
+            "NanoCpus": 0,
+            "OomKillDisable": false
+        },
+        "NetworkSettings": {
+            "Networks": {
+                "shopnow_default": {
+                    "NetworkID": "b2d8f0a1c3e54967a8b1d2f3e4c5b6a70918273645f0e1d2c3b4a5968778695",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "MacAddress": ""
+                }
+            }
+        }
+    }
+]
+
+$ docker inspect --format '{{.State.OOMKilled}} {{.State.ExitCode}}' shopnow-image-processor
+true 137

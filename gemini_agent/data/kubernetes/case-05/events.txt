@@ -1,0 +1,26 @@
+$ kubectl get events -n shopnow --sort-by=.lastTimestamp --field-selector involvedObject.name=analytics-worker-7c4d9f8b65-q8r2n
+LAST SEEN   TYPE      REASON             OBJECT                                  MESSAGE
+6m41s       Warning   FailedScheduling   pod/analytics-worker-7c4d9f8b65-q8r2n   0/3 nodes are available: 3 Insufficient cpu, 3 node(s) didn't match Pod's node affinity/selector. preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+91s         Warning   FailedScheduling   pod/analytics-worker-7c4d9f8b65-q8r2n   0/3 nodes are available: 3 Insufficient cpu, 3 node(s) didn't match Pod's node affinity/selector. preemption: 0/3 nodes are available: 3 No preemption victims found for incoming pod.
+
+$ kubectl describe node gke-shopnow-default-pool-a1b2c3d4-xz12 | grep -A6 "Allocatable:"
+Allocatable:
+  cpu:                3920m
+  ephemeral-storage:  47060071478
+  hugepages-2Mi:      0
+  memory:             12290084Ki
+  pods:               110
+
+$ kubectl describe node gke-shopnow-default-pool-a1b2c3d4-xz12 | grep -A6 "Allocated resources:"
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource           Requests       Limits
+  --------           --------       ------
+  cpu                2500m (63%)    3200m (81%)
+  memory             3776Mi (31%)   5888Mi (49%)
+
+$ kubectl get nodes -L disktype
+NAME                                     STATUS   ROLES    AGE   VERSION             DISKTYPE
+gke-shopnow-default-pool-a1b2c3d4-xz12   Ready    <none>   18d   v1.30.4-gke.1348000   <none>
+gke-shopnow-default-pool-a1b2c3d4-pl88   Ready    <none>   18d   v1.30.4-gke.1348000   <none>
+gke-shopnow-default-pool-a1b2c3d4-kt03   Ready    <none>   18d   v1.30.4-gke.1348000   <none>

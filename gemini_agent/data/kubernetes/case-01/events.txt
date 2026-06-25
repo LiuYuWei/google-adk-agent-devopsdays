@@ -1,0 +1,18 @@
+$ kubectl get events -n shopnow --sort-by=.lastTimestamp --field-selector involvedObject.name=payment-api-7d9f8c6b54-2xk4p
+LAST SEEN   TYPE      REASON      OBJECT                              MESSAGE
+7m18s       Normal    Scheduled   pod/payment-api-7d9f8c6b54-2xk4p    Successfully assigned shopnow/payment-api-7d9f8c6b54-2xk4p to gke-shopnow-default-pool-a1b2c3d4-xz12
+7m10s       Normal    Pulled      pod/payment-api-7d9f8c6b54-2xk4p    Successfully pulled image "gcr.io/shopnow-prod/payment-api:1.4.2" in 6.512s
+6m1s        Normal    Started     pod/payment-api-7d9f8c6b54-2xk4p    Started container payment-api
+6m2s        Normal    Created     pod/payment-api-7d9f8c6b54-2xk4p    Created container payment-api
+2m12s       Warning   BackOff     pod/payment-api-7d9f8c6b54-2xk4p    Back-off restarting failed container payment-api
+
+$ kubectl set env deployment/payment-api -n shopnow --list
+# deployment.apps/payment-api, container payment-api
+APP_ENV=production
+REDIS_URL=redis://redis-master:6379
+LOG_LEVEL=info
+
+$ kubectl get secret -n shopnow
+NAME                      TYPE     DATA   AGE
+order-db-credentials      Opaque   1      12d
+payment-db-credentials    Opaque   1      12d

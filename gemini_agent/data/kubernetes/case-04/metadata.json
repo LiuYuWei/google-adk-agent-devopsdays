@@ -1,0 +1,8 @@
+{
+  "id": "k8s-case-04",
+  "platform": "kubernetes",
+  "namespace": "shopnow",
+  "workload": "email-worker",
+  "difficulty": "入門",
+  "files": ["status.txt", "describe.txt", "logs.txt", "events.txt", "manifest.yaml"]
+}

@@ -1,0 +1,5 @@
+$ docker logs shopnow-report-gen
+Error: No such container: shopnow-report-gen
+
+$ docker compose logs shopnow-report-gen
+no container found for service "shopnow-report-gen"

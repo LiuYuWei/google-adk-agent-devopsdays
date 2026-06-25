@@ -1,0 +1,71 @@
+$ docker build -t shopnow-report-gen:latest .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 412B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.13-slim
+#2 DONE 1.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 89B done
+#3 DONE 0.0s
+
+#4 [1/5] FROM docker.io/library/python:3.13-slim@sha256:2b9c7e1a4d65f0a8b3c2e1d09f7a6b54c3e2d1a0f9b8c7e6d5a4b3c2e1d0f9a8
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 1.84kB done
+#5 DONE 0.0s
+
+#6 [2/5] WORKDIR /app
+#6 CACHED
+
+#7 [3/5] COPY requirements.txt .
+#7 DONE 0.0s
+
+#8 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#8 2.114 Collecting fastapi==0.111.0 (from -r requirements.txt (line 1))
+#8 2.331   Downloading fastapi-0.111.0-py3-none-any.whl.metadata (25 kB)
+#8 2.498 Collecting uvicorn==0.30.1 (from -r requirements.txt (line 2))
+#8 2.602   Downloading uvicorn-0.30.1-py3-none-any.whl.metadata (6.3 kB)
+#8 2.781 ERROR: Could not find a version that satisfies the requirement pandas==99.9.9 (from -r requirements.txt (line 3)) (from versions: 0.1, 0.2, 0.3.0, 0.4.0, 0.4.1, 0.4.2, 0.4.3, 0.7.0, 0.7.1, 0.7.2, 0.7.3, 0.8.0, 0.8.1, 0.9.0, 0.9.1, 1.0.0, 1.0.1, 1.0.2, 1.0.3, 1.0.4, 1.0.5, 1.1.0, 1.1.1, 1.1.2, 1.1.3, 1.1.4, 1.1.5, 1.2.0, 1.2.1, 1.2.2, 1.2.3, 1.2.4, 1.2.5, 1.3.0, 1.3.1, 1.3.2, 1.3.3, 1.3.4, 1.3.5, 1.4.0, 1.4.1, 1.4.2, 1.4.3, 1.4.4, 1.5.0, 1.5.1, 1.5.2, 1.5.3, 2.0.0, 2.0.1, 2.0.2, 2.0.3, 2.1.0, 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.2.0, 2.2.1, 2.2.2, 2.2.3)
+#8 2.782 ERROR: No matching distribution found for pandas==99.9.9
+#8 ERROR: process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
+------
+ > [4/5] RUN pip install --no-cache-dir -r requirements.txt:
+2.781 ERROR: Could not find a version that satisfies the requirement pandas==99.9.9 (from -r requirements.txt (line 3)) (from versions: 0.1, 0.2, 0.3.0, 0.4.0, 0.4.1, 0.4.2, 0.4.3, 0.7.0, 0.7.1, 0.7.2, 0.7.3, 0.8.0, 0.8.1, 0.9.0, 0.9.1, 1.0.0, 1.0.1, 1.0.2, 1.0.3, 1.0.4, 1.0.5, 1.1.0, 1.1.1, 1.1.2, 1.1.3, 1.1.4, 1.1.5, 1.2.0, 1.2.1, 1.2.2, 1.2.3, 1.2.4, 1.2.5, 1.3.0, 1.3.1, 1.3.2, 1.3.3, 1.3.4, 1.3.5, 1.4.0, 1.4.1, 1.4.2, 1.4.3, 1.4.4, 1.5.0, 1.5.1, 1.5.2, 1.5.3, 2.0.0, 2.0.1, 2.0.2, 2.0.3, 2.1.0, 2.1.1, 2.1.2, 2.1.3, 2.1.4, 2.2.0, 2.2.1, 2.2.2, 2.2.3)
+2.782 ERROR: No matching distribution found for pandas==99.9.9
+------
+Dockerfile:7
+--------------------
+   5 |     COPY requirements.txt .
+   6 |
+   7 | >>> RUN pip install --no-cache-dir -r requirements.txt
+   8 |
+   9 |     COPY . .
+--------------------
+ERROR: failed to solve: process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
+
+$ cat Dockerfile
+FROM python:3.13-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8080
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+$ cat requirements.txt
+fastapi==0.111.0
+uvicorn==0.30.1
+pandas==99.9.9
+openpyxl==3.1.5
+python-dateutil==2.9.0

@@ -1,0 +1,10 @@
+$ docker ps
+CONTAINER ID   IMAGE                              COMMAND                  CREATED        STATUS         PORTS                                     NAMES
+b7d2f1a9c3e4   shopnow/legacy-dashboard:0.9.3     "/docker-entrypoint.…"   3 days ago     Up 3 days      0.0.0.0:8080->80/tcp, :::8080->80/tcp     legacy-dashboard
+5c1e8a04b2f7   redis:7.2-alpine                   "docker-entrypoint.s…"   3 days ago     Up 3 days      6379/tcp                                  shopnow-redis
+
+$ docker ps -a
+CONTAINER ID   IMAGE                              COMMAND                  CREATED          STATUS                      PORTS                                     NAMES
+9a3f6c2d71b8   nginx:1.25-alpine                  "/docker-entrypoint.…"   12 seconds ago   Created                                                               shopnow-frontend
+b7d2f1a9c3e4   shopnow/legacy-dashboard:0.9.3     "/docker-entrypoint.…"   3 days ago       Up 3 days                   0.0.0.0:8080->80/tcp, :::8080->80/tcp     legacy-dashboard
+5c1e8a04b2f7   redis:7.2-alpine                   "docker-entrypoint.s…"   3 days ago       Up 3 days                   6379/tcp                                  shopnow-redis
