@@ -12,8 +12,8 @@
 ### 1-2. 複製專案與安裝工具
 ```bash
 # Clone 專案
-git clone https://github.com/LiuYuWei/google-adk-agent-template.git
-cd google-adk-agent-template
+git clone https://github.com/LiuYuWei/google-adk-agent-devopsdays.git
+cd google-adk-agent-devopsdays
 
 # 安裝自動化設定工具
 pip install bwai-workshop-tools

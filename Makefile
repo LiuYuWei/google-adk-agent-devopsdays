@@ -1,7 +1,7 @@
 .PHONY: venv install setup init-env auth enable-apis run clean docker-build docker-run deploy destroy
 
 # 專案設定
-IMAGE_NAME = google-adk-agent-template
+IMAGE_NAME = google-adk-agent-devopsdays
 PORT = 8000
 REGION = us-central1
 
@@ -19,10 +19,6 @@ init-env:
 	@if [ ! -f gemini_agent/.env ]; then \
 		cp gemini_agent/.env.template gemini_agent/.env; \
 		echo "已建立 gemini_agent/.env"; \
-	fi
-	@if [ ! -f litellm_agent/.env ]; then \
-		cp litellm_agent/.env.template litellm_agent/.env; \
-		echo "已建立 litellm_agent/.env"; \
 	fi
 
 # 一鍵初始化環境 (建立虛擬環境、安裝套件並初始化 .env)

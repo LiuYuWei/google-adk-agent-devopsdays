@@ -1,15 +1,13 @@
-# Google ADK Agent Template
+# Google ADK Agent DevOpsDays
 
-這是一個基於 Google ADK (Agent Development Kit) 的專案範本，旨在提供一個標準化的架構，讓開發者可以快速建立、測試並部署 AI Agent。
+這是一個基於 Google ADK (Agent Development Kit) 的專案，提供標準化的架構讓開發者快速建立、測試並部署 AI Agent，並內建一組 DevOpsDays k8s/docker 模擬故障資料集供練習診斷。
 
 ## 專案特點
 
-- **雙引擎支援**: 內建 `gemini_agent` (原生 Google Gemini) 與 `litellm_agent` (透過 LiteLLM 支援 OpenAI, Anthropic 等)。
+- **Gemini 原生驅動**: 內建 `gemini_agent`，採用原生 Google Gemini (Vertex AI) 驅動。
 - **結構化開發**: 透過資料夾結構管理 `tools` (工具)、`models` (模型)、`instruction` (指令) 與 `skills` (情境技能包)。
-- **Skills 整合範例**: 依 [Agent Skill 規範](https://agentskills.io/specification) 內建兩個風格不同的範例 Skill，示範如何將指令、參考資料與工具打包成可動態載入的技能：
+- **Skills 整合範例**: 依 [Agent Skill 規範](https://agentskills.io/specification) 內建範例 Skill，示範如何將指令、參考資料與工具打包成可動態載入的技能：
   - `gemini_agent/skills/taiwan-travel/`: 純知識型 Skill，搭配 `references/` 提供台灣縣市與美食資料。
-  - `litellm_agent/skills/timezone-helper/`: 工具搭配型 Skill，引導 LLM 把使用者輸入轉換為 IANA 時區字串後再呼叫 `get_current_time` 工具。
-  - 兩個 agent 故意各放一個不同情境的 Skill，方便互相比對學習。
 - **時區工具範例**: 內建支援全球時區轉換的 `get_current_time` 工具，展示如何開發具備參數輸入的工具。
 - **Makefile 自動化**: 提供 `make setup` 一鍵初始化環境，自動處理虛擬環境與 `.env` 配置。
 
@@ -22,7 +20,7 @@
    ```
 
 2. **配置環境變數**:
-   編輯各 Agent 資料夾下的 `.env` 檔案，填入您的 API Key 或 Vertex AI 設定。
+   編輯 `gemini_agent/.env` 檔案，填入您的 Vertex AI 設定（或 API Key）。
 
 3. **啟動 Agent**:
    ```bash
@@ -33,12 +31,12 @@
 ## 目錄結構
 
 - `gemini_agent/`: 使用 Google Gemini 原生驅動的 Agent 實作。
-- `litellm_agent/`: 使用 LiteLLM 驅動的通用 Agent (支援 OpenAI, Claude 等)。
   - `tools/sample_tool.py`: 存放工具函式 (如時區查詢)。
-  - `models/default.py`: 模型初始化配置。
+  - `models/gemini_model.py`: 模型初始化配置。
   - `instruction/system.md`: 系統提示詞。
   - `skills/<skill-name>/SKILL.md`: 依 Agent Skill 規範撰寫的情境技能包，可帶 `references/`、`assets/`、`scripts/`。
-  - `.env.template`: 該 Agent 專用的環境變數範本。
+  - `data/`: DevOpsDays k8s/docker 模擬故障資料集（供 Agent 練習查 log、診斷根因）。
+  - `.env.template`: Agent 專用的環境變數範本。
 
 ## 開發指南
 

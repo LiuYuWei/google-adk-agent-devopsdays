@@ -61,6 +61,6 @@
 
 ## 🎓 建議的課堂流程
 1. 學員寫一個讀取「固定資料夾格式」的工具（例如 `read_incident(platform, case_id, file)`）。
-2. 把工具註冊進 `gemini_agent` / `litellm_agent`（見專案根目錄 `CLAUDE.md`）。
+2. 把工具註冊進 `gemini_agent`（見專案根目錄 `CLAUDE.md`）。
 3. 丟一個 case（例如 `kubernetes/case-03`）給 Agent，請它：① 讀 log → ② 指出根因 → ③ 產出修正後的 `manifest.yaml`。
 4. 講師對照 `solutions/<platform>-case-0X.md` 驗收。

@@ -1,6 +1,6 @@
 # 🧠 Claude Code 開發與維護指令手冊 (通用規範)
 
-本文件是給 **Claude Code (AI Agent)** 的核心行動手冊。請依照使用者的中文指令，彈性地管理專案中的 Agent 資料夾（如 `gemini_agent/`、`litellm_agent/` 或使用者自定義的資料夾）。
+本文件是給 **Claude Code (AI Agent)** 的核心行動手冊。請依照使用者的中文指令，彈性地管理專案中的 Agent 資料夾（如 `gemini_agent/` 或使用者自定義的資料夾）。
 
 ---
 
@@ -8,8 +8,7 @@
 
 在收到改動指令時，請先根據上下文識別目標資料夾（`<agent_dir>`）：
 - **關鍵字：Gemini** ➡️ `gemini_agent/`。
-- **關鍵字：LiteLLM/GPT/Claude/萬用** ➡️ `litellm_agent/`。
-- **無明確說明**：先執行 `ls` 確認現有 Agent 目錄，或詢營使用者。
+- **無明確說明**：先執行 `ls` 確認現有 Agent 目錄，或詢問使用者。
 
 ---
 
@@ -22,7 +21,7 @@
 | **「修改角色指令、行為或性格」** | `<agent_dir>/instruction/system.md` | 調整核心提示詞 (Prompt)。 |
 | **「開發或改動 Python 工具 (Tools)」** | `<agent_dir>/tools/sample_tool.py` | 撰寫函式邏輯並提供繁體中文註解。 |
 | **「新增/修改 Skills（情境技能包）」** | `<agent_dir>/skills/<skill-name>/` | 撰寫 `SKILL.md` 與 `references/`，依 Agent Skill 規範組織。 |
-| **「調整模型版本或供應商」** | `<agent_dir>/models/default.py` | 更新模型初始化設定。 |
+| **「調整模型版本或供應商」** | `<agent_dir>/models/gemini_model.py` | 更新模型初始化設定。 |
 | **「註冊工具至 Agent 的實例中」** | `<agent_dir>/agent.py` | 管理 `SkillToolset` 中的 `skills` 與 `additional_tools`。 |
 | **「設定金鑰 (API Key) 或環境參數」** | `<agent_dir>/.env` | **填寫或修改金鑰、專案 ID 等設定。** |
 

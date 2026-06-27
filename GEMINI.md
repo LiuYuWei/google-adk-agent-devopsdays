@@ -1,6 +1,6 @@
 # 🧠 Gemini CLI 開發與維護指令手冊 (通用規範)
 
-這份文件是給 **Gemini CLI (AI Agent)** 的核心行動準則。請協助使用者開發與管理專案中的各個 Agent（如 `gemini_agent/`、`litellm_agent/` 或自定義資料夾）。
+這份文件是給 **Gemini CLI (AI Agent)** 的核心行動準則。請協助使用者開發與管理專案中的各個 Agent（如 `gemini_agent/` 或自定義資料夾）。
 
 ---
 
@@ -8,7 +8,6 @@
 
 當使用者提出需求時，請先判斷目標 Agent 資料夾（以下標記為 `<agent_dir>`）：
 - 如果指令提到 **Gemini**：對應 `gemini_agent/`。
-- 如果指令提到 **LiteLLM/萬用/其他模型**：對應 `litellm_agent/`。
 - 如果使用者已**建立新 Agent**：請先列出目錄確認資料夾名稱。
 
 ---
@@ -22,7 +21,7 @@
 | **「修改 AI 的性格或指令」** | `<agent_dir>/instruction/system.md` | 調整 AI 的角色定義與規範。 |
 | **「增加或修改功能工具 (Tools)」** | `<agent_dir>/tools/sample_tool.py` | 撰寫 Python 邏輯並提供繁體中文 Docstring。 |
 | **「新增/修改 Skills（情境技能包）」** | `<agent_dir>/skills/<skill-name>/` | 撰寫 `SKILL.md` 與 `references/`，依 Agent Skill 規範組織。 |
-| **「更換模型版本」** | `<agent_dir>/models/default.py` | 更新模型字串（如 `gemini-2.5-flash`）。 |
+| **「更換模型版本」** | `<agent_dir>/models/gemini_model.py` | 更新模型字串（如 `gemini-2.5-flash`）。 |
 | **「註冊或管理工具/Skills 清單」** | `<agent_dir>/agent.py` | 在 `SkillToolset` 的 `additional_tools` / `skills` 中增減內容；Skills 由 `load_all_skills()` 自動掃描。 |
 | **「設定金鑰 (API Key) 或環境參數」** | `<agent_dir>/.env` | **填寫或修正金鑰、專案 ID 等設定。** |
 

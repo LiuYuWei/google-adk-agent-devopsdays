@@ -1,10 +1,10 @@
-# Google ADK Agent Template
+# Google ADK Agent DevOpsDays
 
-This is a project template based on the Google ADK (Agent Development Kit), designed to provide a standardized architecture for developers to quickly build, test, and deploy AI Agents.
+This is a project based on the Google ADK (Agent Development Kit), providing a standardized architecture for developers to quickly build, test, and deploy AI Agents. It also ships a DevOpsDays k8s/docker simulated fault dataset for diagnosis practice.
 
 ## Features
 
-- **Dual Engine Support**: Built-in `gemini_agent` (Native Google Gemini) and `litellm_agent` (Universal support via LiteLLM for OpenAI, Anthropic, etc.).
+- **Native Gemini Engine**: Built-in `gemini_agent` powered by native Google Gemini (Vertex AI).
 - **Structured Development**: Manage `tools`, `models`, and `instructions` through a clean directory layout.
 - **Timezone Tool Example**: Includes a `get_current_time` tool with multi-timezone support, demonstrating how to build tools with parameters.
 - **Makefile Automation**: `make setup` for one-click environment initialization, handling venv and `.env` files automatically.
@@ -18,7 +18,7 @@ This is a project template based on the Google ADK (Agent Development Kit), desi
    ```
 
 2. **Configure Environment**:
-   Edit the `.env` file in each agent directory with your API keys or Vertex AI settings.
+   Edit `gemini_agent/.env` with your Vertex AI settings (or API keys).
 
 3. **Run Agent**:
    ```bash
@@ -29,10 +29,10 @@ This is a project template based on the Google ADK (Agent Development Kit), desi
 ## Directory Structure
 
 - `gemini_agent/`: Agent implementation driven by native Google Gemini.
-- `litellm_agent/`: Universal Agent driven by LiteLLM (supports OpenAI, Claude, etc.).
   - `tools/sample_tool.py`: Utility functions (e.g., timezone lookup).
-  - `models/default.py`: Model initialization logic.
+  - `models/gemini_model.py`: Model initialization logic.
   - `instruction/system.md`: System instructions.
+  - `data/`: DevOpsDays k8s/docker simulated fault dataset for diagnosis practice.
   - `.env.template`: Local environment variable template.
 
 ## Development Guide

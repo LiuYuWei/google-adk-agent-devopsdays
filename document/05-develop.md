@@ -59,8 +59,7 @@ def get_weather(city: str) -> str:
 5. 重新執行 `make run`，在 Web UI 提出符合 Skill 描述的問題（例如「我想去花蓮玩」），觀察 Agent 是否載入該 Skill 的指令。
 
 ### 內建範例
-- `gemini_agent/skills/taiwan_travel/`：台灣旅遊推薦助手，含縣市與美食兩份 references。
-- `litellm_agent/skills/timezone_helper/`：時區查詢助手，搭配既有的 `get_current_time` 工具。
+- `gemini_agent/skills/taiwan-travel/`：台灣旅遊推薦助手，含縣市與美食兩份 references。
 
 ### 進一步閱讀
 - ADK Skills 官方文件：[Skills for ADK agents](https://google.github.io/adk-docs/)
